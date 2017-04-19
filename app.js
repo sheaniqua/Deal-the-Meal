@@ -70,7 +70,6 @@ var randomSearchTerm = [
     "eggrolls",
     "English muffins",
     "edamame",
-    "eel sushi",
     "fajita",
     "falafel",
     "fish",
@@ -193,17 +192,21 @@ function handleButtonClick() {
 }
 
 function handleMealClick () {
-
+  console.log('mealClick')
+  $('.meal').on('click', function() {
+    console.log('meal')
+  })
 }
 
 function renderResults(data) {
   console.log(data)
   var listItems = data.hits.map((item) => {
-    console.log("<li data-uri=" + item.recipe.uri + "><a href='" + item.recipe.shareAs + ">" + item.recipe.label + "'</a></li>")
-    return "<li data-uri=" + item.recipe.uri + "><a href='" + item.recipe.shareAs + ">" + item.recipe.label + "'</a></li>"
+    console.log("renderResults")
+    return "<li data-uri=" + item.recipe.uri + "><a class='meal' href=>" + item.recipe.label + "<img src=" + item.recipe.image + "></a></li>"
   })
   $('.js-ul').html(listItems);
   // $('.js-ul').html(listItems[Math.floor(Math.random() * randomSearchTerm.length)])
+  handleMealClick();
 }
 
 $(document).ready(function() {
