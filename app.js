@@ -195,6 +195,9 @@ function handleMealClick () {
   console.log('mealClick')
   $('.meal').on('click', function() {
     console.log('meal')
+    $.get("https://api.edamam.com/search?app_key=d1dfe212e6e24332bd7f41e23aa2f5b3&app_id=a217352d&q=" + term).done(function (data) {
+      renderResults(data);
+    return "<li>" + item.recipe.label + item.recipe.image + "</li>"
   })
 }
 
@@ -207,6 +210,9 @@ function renderResults(data) {
   $('.js-ul').html(listItems);
   // $('.js-ul').html(listItems[Math.floor(Math.random() * randomSearchTerm.length)])
   handleMealClick();
+}
+function renderMeal() {
+
 }
 
 $(document).ready(function() {
