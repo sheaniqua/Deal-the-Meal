@@ -158,6 +158,7 @@ var randomSearchTerm = [
     "Zucchini"]
 var foodToForkBaseURL = 'http://food2fork.com/api/search'
 var foodToForkAPIKey = '2b6b377e09f256ce049a0984607f1f37'
+var term = randomSearchTerm[Math.floor(Math.random()* randomSearchTerm.length)]
 
 function getDataFromAPI(callback) {
   var query = {
@@ -180,9 +181,9 @@ function getDataFromAPI(callback) {
 
 // example request
 function handleButtonClick() {
-  $('button').on('click', function() {
+  $('button').on('click', function(event) {
     // console.log('click');
-    var term = randomSearchTerm[Math.floor(Math.random() * randomSearchTerm.length)]
+    // $(event.currentTarget).hide()
     $.get("https://api.edamam.com/search?app_key=d1dfe212e6e24332bd7f41e23aa2f5b3&app_id=a217352d&q=" + term).done(function (data) {
       renderResults(data);
     
@@ -193,21 +194,37 @@ function handleButtonClick() {
 
 function handleMealClick () {
   console.log('mealClick')
-  $('.meal').on('click', function() {
+  $('.meal').on('click', function(event) {
     console.log('meal')
-    $.get("https://api.edamam.com/search?app_key=d1dfe212e6e24332bd7f41e23aa2f5b3&app_id=a217352d&q=" + term).done(function (data) {
-      renderResults(data);
-    return "<li>" + item.recipe.label + item.recipe.image + "</li>"
+    var RECIPE_URL = escape($(event.currentTarget).data('uri'))
+    console.log(RECIPE_URL)
+    $.get("https://api.edamam.com/search?app_key=d1dfe212e6e24332bd7f41e23aa2f5b3&app_id=a217352d&r=" + RECIPE_URL).done(function (data) {
+      console.log(data)
+      // renderResults(data);
+      // if (data.recipe) {
+      //   return "<li>" + data.recipe.label + data.recipe.image + "</li>"
+      // }
+    })
   })
 }
-
 function renderResults(data) {
   console.log(data)
   var listItems = data.hits.map((item) => {
     console.log("renderResults")
-    return "<li data-uri=" + item.recipe.uri + "><a class='meal' href=>" + item.recipe.label + "<img src=" + item.recipe.image + "></a></li>"
+    return   `<div class='recipe-card col-sm-6 col-md-6 col-lg-4 text-center'>
+    <h4 class='recipe-title'>${item.recipe.label}</h4>
+    <img class='results-img rounded' src=${item.recipe.image}>
+    <p class='prep-time'>Ready in __ minutes!</p>
+    <div class='recipe-card-actions text-center'>
+      <button type='button' class='view-ingredients btn btn-sm btn-primary'>View Ingredients and Instructions</button>
+      <button class='add-to-list btn btn-sm btn-primary'>Add ingredients to shopping list</button>
+    </div>      
+  </div>`
+  
   })
-  $('.js-ul').html(listItems);
+
+
+  $('.js-results').html(listItems);
   // $('.js-ul').html(listItems[Math.floor(Math.random() * randomSearchTerm.length)])
   handleMealClick();
 }

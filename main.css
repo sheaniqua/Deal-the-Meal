@@ -1,13 +1,67 @@
-.button {
-  padding-top: 25%;
+body { 
+  background: url(images/food_items.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: 100%;
 }
 
-button {
-  border-radius:10%;
+.nav-bar {
+  background-color: white;
+  height: 125px;
+  text-align: center;
+}
+.nav-text {
+  padding-top: 20px;
+  top: 50%;
+}
+.initiate-button {
+  padding-top: 15%;
+}
+
+.initiate-button button {
+  background-color: white;
+  border-radius:50%;
   display: block;
-  /*height: 100px;*/
+  font-size: 250%;
+  height: 200px;
   margin: auto;
   text-align: center;
   /*width: 100px;*/
   vertical-align: middle;
+  width: 200px;
+
+}
+
+.recipe-card {
+  background-color: white;
+  height: 450px;
+  margin-bottom:20px;
+  margin-top:20px;
+}
+
+.recipe-card:last-child {
+  margin-bottom:170px;
+}
+
+.recipe-title {
+  background-color: #E5E5E5;
+  font-size: 18px;
+  padding: 10px;
+  text-align: center;
+}
+
+.results-img {
+  height: 60%;
+  max-width: 380px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.recipe-card-actions button {
+  display: block;
+  text-align: center;
+  margin-top: 2px;
+  margin-left: auto;
+  margin-right: auto;
 }
