@@ -207,17 +207,21 @@ function handleMealClick () {
     })
   })
 }
+
+
 function renderResults(data) {
-  console.log(data)
-  var listItems = data.hits.map((item) => {
-    console.log("renderResults")
-    return   `<div class='recipe-card col-sm-6 col-md-6 col-lg-4 text-center'>
-    <h4 class='recipe-title'>${item.recipe.label}</h4>
-    <img class='results-img rounded' src=${item.recipe.image}>
-    <p class='prep-time'>Ready in __ minutes!</p>
-    <div class='recipe-card-actions text-center'>
-      <button type='button' class='view-ingredients btn btn-sm btn-primary'>View Ingredients and Instructions</button>
-      <button class='add-to-list btn btn-sm btn-primary'>Add ingredients to shopping list</button>
+  console.log(data.hits.slice(0,9))
+  var listItems = data.hits.slice(0,9).map((item) => {
+    console.log()
+    return   `<div class='col-4'>
+      <div class='recipe-card'>
+        <h4 class='recipe-title'>${item.recipe.label}</h4>
+        <img class='results-img rounded' src=${item.recipe.image}>
+        <p class='prep-time'></p>
+        <div class='recipe-card-actions'>
+          <button type='button' class='view-ingredients btn btn-sm btn-primary'>View Ingredients and Instructions</button>
+          <button class='add-to-list btn btn-sm btn-primary'>Add ingredients to shopping list</button>
+      </div>
     </div>      
   </div>`
   
@@ -228,6 +232,8 @@ function renderResults(data) {
   // $('.js-ul').html(listItems[Math.floor(Math.random() * randomSearchTerm.length)])
   handleMealClick();
 }
+
+
 function renderMeal() {
 
 }
