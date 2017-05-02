@@ -192,24 +192,27 @@ function handleButtonClick() {
   })
 }
 
+
 function handleMealClick () {
   console.log('mealClick')
   $('.meal').on('click', function(event) {
     console.log('meal')
-    var RECIPE_URL = escape($(event.currentTarget).data('uri'))
+    var RECIPE_URL = escape(($(event.currentTarget).data('uri')))
     console.log(RECIPE_URL)
-    $.get("https://api.edamam.com/search?app_key=d1dfe212e6e24332bd7f41e23aa2f5b3&app_id=a217352d&r=" + RECIPE_URL).done(function (data) {
-      console.log(data)
+    $.get("https://api.edamam.com/search?app_key=d1dfe212e6e24332bd7f41e23aa2f5b3&app_id=a217352d&r=" + "http://" + RECIPE_URL).done(function (data) {
+        console.log("renderMEAL")
+        renderMeal(data);
       // renderResults(data);
       // if (data.recipe) {
       //   return "<li>" + data.recipe.label + data.recipe.image + "</li>"
       // }
     })
   })
+ 
 }
 
-
 function renderResults(data) {
+  console.log(data)
   console.log(data.hits.slice(0,9))
   var listItems = data.hits.slice(0,9).map((item) => {
     console.log()
@@ -219,8 +222,8 @@ function renderResults(data) {
         <img class='results-img rounded' src=${item.recipe.image}>
         <p class='prep-time'></p>
         <div class='recipe-card-actions'>
-          <button type='button' class='view-ingredients btn btn-sm btn-primary'>View Ingredients and Instructions</button>
-          <button class='add-to-list btn btn-sm btn-primary'>Add ingredients to shopping list</button>
+          <button data-uri=${item.recipe.uri} type='button' class='view-ingredients btn btn-sm btn-primary meal'>View Ingredients and Instructions</button>
+          <button class='add-to-list btn btn-sm btn-primary '>Add ingredients to shopping list</button>
       </div>
     </div>      
   </div>`
@@ -234,8 +237,18 @@ function renderResults(data) {
 }
 
 
-function renderMeal() {
-
+function renderMeal(data) {
+  console.log(data)
+  var resultElement = ''
+  var elementID = $('.modal-body')
+  $('.modal-body').css('display', 'block');
+  data[0].ingredientLines.forEach(function(item) {
+    console.log(item)
+    resultElement += `<li>${item}</li>`
+  });
+  // resultElement += `<h2>Instructions ${data[0].url}`;
+  $('.modal-title').text(data[0].label);
+  elementID.html(resultElement)
 }
 
 $(document).ready(function() {
