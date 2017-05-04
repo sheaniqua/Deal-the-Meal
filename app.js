@@ -21,6 +21,7 @@ var randomSearchTerm = [
     "antelope",
     "ahi tuna",
     "albacore tuna",
+    "alfredo",
     "Apple juice",
     "Avocado roll",
     "Bruscetta",
@@ -146,6 +147,7 @@ var randomSearchTerm = [
     "Tater tots",
     "Tacos",
     "Toast",
+    "Tri-tip",
     "Vegetables",
     "Vegetarian", 
     "Veggies",
@@ -211,6 +213,22 @@ function handleMealClick () {
  
 }
 
+
+function handleCloseModalClick() {
+  $('.close-modal').on('click', function(event) {
+    console.log('modalClose')
+    $('.modal').css('display', 'none')
+  })
+
+  var modal = document.getElementById('myModal');
+  window.onclick = function(event) {
+    if (event.target == myModal) {
+        myModal.style.display = "none";
+    }
+  }
+}
+
+
 function renderResults(data) {
   console.log(data)
   console.log(data.hits.slice(0,9))
@@ -239,19 +257,33 @@ function renderResults(data) {
 
 function renderMeal(data) {
   console.log(data)
+  
+// so no scrolling in background
+  
+  // $(".view-ingredients").on("click", function () {
+  //   $("body").addClass("modal-open");
+  //   });
+  // $(".close".on("click", function () {
+  //   $("body").removeClass("modal-open")
+  // });
   var resultElement = ''
-  var elementID = $('.modal-body')
-  $('.modal-body').css('display', 'block');
+  var elementID = $('.modal-list')
+  $('.modal').css('display', 'block');
   data[0].ingredientLines.forEach(function(item) {
     console.log(item)
     resultElement += `<li>${item}</li>`
   });
   // resultElement += `<h2>Instructions ${data[0].url}`;
   $('.modal-title').text(data[0].label);
+  $('.modal-footer a').attr('href', data[0].url);
   elementID.html(resultElement)
+  handleCloseModalClick();
 }
 
 $(document).ready(function() {
   handleButtonClick();
 })
- 
+
+
+
+

@@ -17,24 +17,28 @@
     </div>  
   </div>
   <div class='initiate-button'>
-    <button type="button">Deal the Meal!</button>
+    <button type="button" class='big-button'>Deal the Meal!</button>
   </div>
   <div id='results' class='js-results row'>
   
   </div>
 
   <!-- Modal -->
-  <div class='modal'>
+  <div id='myModal' class='modal'>
     <div class='modal-content'>
       <div class='modal-header'>
-        <span class='close'>&times;</span>
+        <span class='close close-modal'>&times;</span>
         <h2 class='modal-title'>Recipe Title</h2>
       </div>
       <div class='modal-body'>
+        <h3>Ingredients:</h3>
+        <ul class='modal-list'></ul>
       </div>
       <div class='modal-footer'>
-        <button type='button' class='modal-button-close' >Close</button>
-        <button type='button' class='modal-button-link'><a href="">See Recipe</a></button>
+        <div class='modal-buttons-footer'>
+          <button type='button' class='modal-button-close close-modal modal-button' >Close</button>
+          <a href="" target='_blanck'><button type='button' class='modal-button-link modal-button'>See Recipe</button></a>
+        </div>
       </div>
     </div>
   </div>
