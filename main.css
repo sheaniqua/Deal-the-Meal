@@ -35,6 +35,10 @@ body {
   padding-top: 20px;
   top: 50%;
 }
+h1 {
+  font-size: 50px;
+  margin: 0;
+}
 .initiate-button {
   padding-top: 15%;
 }
@@ -92,11 +96,16 @@ padding-right: 1.04166666%;
 }
 
 
+
 /* Non-mobile, grid */
 @media only screen and (min-width: 640px) {
   /* 3 columns, 3/12 in % */
   .col-3 {
     width: 25%;
+  }
+
+  .results-img {
+    max-width:;
   }
 
   /* 4 columns, 4/12 in % */
@@ -142,29 +151,35 @@ padding-right: 1.04166666%;
 }
 
 .recipe-card-actions button {
-  background-color: #2a2928;
-  color: #E5E5E5;
+  background-color: #E5E5E5;
+  color: #4b4a47;
   display: block;
+  font-size: 15px;
   margin-top: 2px;
   margin-left: auto;
   margin-right: auto;
+  padding: 10px 22px;
   text-align: center;
-  border-color: #2a2928;
-  border-radius: 5px;
+  border:none;
+  /*border-radius: 5px;*/
   width: 180px;
   
 }
 
-.recipe-card-actions button:last-child {
-  margin-bottom: 10px;
-
+.recipe-card-actions button:hover,
+.recipe-card-actions button:focus {
+  color: white;
+  background-color: black;
+  border: none;
 }
 
 
-/*<span>x
+/*
 
-$('.modal').css('display', 'none')*/
+.recipe-card-actions button:last-child {
+  margin-bottom: 10px;
 
+}*/
 
 
 
@@ -194,7 +209,7 @@ $('.modal').css('display', 'none')*/
   right:0;
   margin: auto;
   height:500px;
-  width:500px;
+  width:600px;
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
   animation-name: animatetop;
@@ -313,3 +328,13 @@ button:hover, button:focus {
   background-color: #e5e5e5;
   border: none;
 }*/
+
+@media only screen and (min-width: 600px ) and (max-width: 900px) {
+  .results-img {
+    max-width: 150px;
+    max-height: 150px;
+  }
+  .recipe-card {
+    height: 250px;
+  }
+}

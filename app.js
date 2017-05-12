@@ -201,8 +201,8 @@ function handleMealClick () {
     console.log('meal')
     var RECIPE_URL = escape(($(event.currentTarget).data('uri')))
     console.log(RECIPE_URL)
-    $.get("https://api.edamam.com/search?app_key=d1dfe212e6e24332bd7f41e23aa2f5b3&app_id=a217352d&r=" + "http://" + RECIPE_URL).done(function (data) {
-        console.log("renderMEAL")
+    $.get("https://api.edamam.com/search?app_key=d1dfe212e6e24332bd7f41e23aa2f5b3&app_id=a217352d&r=" + RECIPE_URL).done(function (data) {
+        console.log(data)
         renderMeal(data);
       // renderResults(data);
       // if (data.recipe) {
@@ -211,6 +211,9 @@ function handleMealClick () {
     })
   })
  
+}
+function handleAddToListClick() {
+
 }
 
 
@@ -238,14 +241,13 @@ function renderResults(data) {
       <div class='recipe-card'>
         <h4 class='recipe-title'>${item.recipe.label}</h4>
         <img class='results-img rounded' src=${item.recipe.image}>
-        <p class='prep-time'></p>
         <div class='recipe-card-actions'>
-          <button data-uri=${item.recipe.uri} type='button' class='view-ingredients btn btn-sm btn-primary meal'>View Ingredients and Instructions</button>
-          <button class='add-to-list btn btn-sm btn-primary '>Add ingredients to shopping list</button>
+          <button data-uri=${item.recipe.uri} type='button' class='view-ingredients btn btn-sm btn-primary meal'>View Ingredients</button>
+          
       </div>
     </div>      
   </div>`
-  
+  // (goes underneath View Ingredients button)<a href="" target='_blanck'><button type='button' class='modal-button-link modal-button'>See Recipe</button></a>
   })
 
 
