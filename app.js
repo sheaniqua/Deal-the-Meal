@@ -172,20 +172,9 @@ function getDataFromAPI(callback) {
   $.getJSON(foodToForkBaseURL, query, callback);
 }
 
-// function getCORS(url, success) {
-//     var xhr = new XMLHttpRequest();
-//     if (!('withCredentials' in xhr)) xhr = new XDomainRequest(); // fix IE8/9
-//     xhr.open('GET', url);
-//     xhr.onload = success;
-//     xhr.send();
-//     return xhr;
-// }
-
 // example request
 function handleButtonClick() {
   $('button').on('click', function(event) {
-    // console.log('click');
-    // $(event.currentTarget).hide()
     $.get("https://api.edamam.com/search?app_key=d1dfe212e6e24332bd7f41e23aa2f5b3&app_id=a217352d&q=" + term).done(function (data) {
       renderResults(data);
     
@@ -196,30 +185,18 @@ function handleButtonClick() {
 
 
 function handleMealClick () {
-  console.log('mealClick')
   $('.meal').on('click', function(event) {
-    console.log('meal')
     var RECIPE_URL = escape(($(event.currentTarget).data('uri')))
-    console.log(RECIPE_URL)
     $.get("https://api.edamam.com/search?app_key=d1dfe212e6e24332bd7f41e23aa2f5b3&app_id=a217352d&r=" + RECIPE_URL).done(function (data) {
-        console.log(data)
         renderMeal(data);
-      // renderResults(data);
-      // if (data.recipe) {
-      //   return "<li>" + data.recipe.label + data.recipe.image + "</li>"
-      // }
     })
   })
  
-}
-function handleAddToListClick() {
-
 }
 
 
 function handleCloseModalClick() {
   $('.close-modal').on('click', function(event) {
-    console.log('modalClose')
     $('.modal').css('display', 'none')
   })
 
@@ -233,10 +210,7 @@ function handleCloseModalClick() {
 
 
 function renderResults(data) {
-  console.log(data)
-  console.log(data.hits.slice(0,9))
   var listItems = data.hits.slice(0,9).map((item) => {
-    console.log()
     return   `<div class='col-4'>
       <div class='recipe-card'>
         <h4 class='recipe-title'>${item.recipe.label}</h4>
@@ -247,35 +221,23 @@ function renderResults(data) {
       </div>
     </div>      
   </div>`
-  // (goes underneath View Ingredients button)<a href="" target='_blanck'><button type='button' class='modal-button-link modal-button'>See Recipe</button></a>
+  
   })
 
 
   $('.js-results').html(listItems);
-  // $('.js-ul').html(listItems[Math.floor(Math.random() * randomSearchTerm.length)])
+  
   handleMealClick();
 }
 
 
 function renderMeal(data) {
-  console.log(data)
-  
-// so no scrolling in background
-  
-  // $(".view-ingredients").on("click", function () {
-  //   $("body").addClass("modal-open");
-  //   });
-  // $(".close".on("click", function () {
-  //   $("body").removeClass("modal-open")
-  // });
   var resultElement = ''
   var elementID = $('.modal-list')
   $('.modal').css('display', 'block');
   data[0].ingredientLines.forEach(function(item) {
-    console.log(item)
     resultElement += `<li>${item}</li>`
   });
-  // resultElement += `<h2>Instructions ${data[0].url}`;
   $('.modal-title').text(data[0].label);
   $('.modal-footer a').attr('href', data[0].url);
   elementID.html(resultElement)
